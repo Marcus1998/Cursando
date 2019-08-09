@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>login Instituição</title>
+        <h:outputStylesheet name="estilo.css" library="css"/>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="115" resizable="false" collapsible="false">
+                <h:panelGrid columns="2">
+                    <p:graphicImage height="70" width="70" library="imagens" name="logoCursando.png"/>
+                    <h1>Cursando</h1>
+                </h:panelGrid>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="100" closable="true" collapsible="true" >               
+                <h2>Cursando - Marcus Teixeira</h2>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                <h:form>
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Cadastrar Curso" url="cadastrarCurso.xhtml" />
+                            <p:menuitem value="Listar Cursos" url="listarCursos.xhtml" />
+                            <p:menuitem value="Atualizar Conta" action="#{instituicaoBean.editar()}" />
+                            <p:menuitem value="Excluir Conta" action="#{instituicaoBean.excluir()}" />
+                            <p:menuitem value="Sair" action="#{instituicaoBean.sair()}" />
+                        </p:submenu>
+                    </p:menu>
+                </h:form>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="center">
+                <h:form id="formcadcur">
+                    <h:panelGrid id="grid" columns="1">
+                        <h:panelGrid  columns="3">
+                            <h:outputLabel value="URL da Imagem: "/>
+                            <p:inputText id="imagem" value="#{cursoBean.curso.imagem}" required="true" > 
+                            </p:inputText>
+                            <p:message for="imagem" />
+                        </h:panelGrid>
+                        
+                        <h:panelGrid  columns="3">
+                            <p:outputLabel value="Status: " />
+                            <p:selectOneMenu id="status" value="#{cursoBean.curso.status}" style="width:125px">
+                                <f:selectItems itemLabel="#{statuses}" value="#{cursoBean.status}" var="statuses" itemValue="#{statuses}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid  columns="3">
+                            <h:outputLabel value="Nome: "/>
+                            <p:inputText id="nome" value="#{cursoBean.curso.nome}" required="true" > 
+                                <f:validateLength minimum="5" maximum="20" />
+                            </p:inputText>
+                            <p:message for="nome" />
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="Data da ultima atualização: "/>
+                            <p:calendar id="dataAtua" value="#{cursoBean.curso.ultimaAtualizacao}" required="true"/>
+                            <p:message for="dataAtua" style="color:red" />
+                        </h:panelGrid>
+                        
+                        <h:panelGrid  columns="3">
+                            <h:outputLabel value="Descrição: "/>
+                            <p:inputTextarea id="descricao" rows="10" cols="30" required="true" value="#{cursoBean.curso.descricao}">
+                                <f:validateLength minimum="30" maximum="255" />
+                            </p:inputTextarea>
+                            <p:message for="descricao" />
+                        </h:panelGrid>
+                        
+                        <h:panelGrid  columns="3">
+                            <p:outputLabel value="Conteudo Programatico: "/>
+                            <p:inputTextarea id="conteudo" rows="10" cols="30" required="true" value="#{cursoBean.curso.conteudoProgramatico}">
+                                <f:validateLength minimum="30" maximum="255" />
+                            </p:inputTextarea>
+                            <p:message for="conteudo" />
+                        </h:panelGrid>
+                        
+                        <h:panelGrid  columns="3">
+                            <h:outputLabel value="Numero de horas: "/>
+                            <p:inputText id="horas" value="#{cursoBean.curso.horas}" required="true"> 
+                                <f:validateLength minimum="1" maximum="3" />
+                            </p:inputText>
+                            <p:message for="horas" />
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="2">
+                            <p:commandButton value="Atualizar" action="#{cursoBean.cadastrar()}" update="formcadcur" icon="ui-icon-disk"/>
+                            <p:commandButton value="Limpar" action="#{cursoBean.limpar('atualizarCurso')}" update="formcadcur" immediate="true"/>
+                        </h:panelGrid>
+
+                    </h:panelGrid>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

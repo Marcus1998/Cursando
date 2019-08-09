@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet name="estilo.css" library="css"/>
+        <title>Listar Cursos</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="115" resizable="false" collapsible="false">
+                <h:panelGrid columns="2">
+                    <p:graphicImage height="70" width="70" library="imagens" name="logoCursando.png"/>
+                    <h1>Cursando</h1>
+                </h:panelGrid>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="100" closable="true" collapsible="true">               
+                <h2>Cursando - Marcus Teixeira</h2>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                <h:form>
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Cadastrar Curso" url="cadastrarCurso.xhtml" />
+                            <p:menuitem value="Listar Cursos" url="listarCursos.xhtml" />
+                            <p:menuitem value="Atualizar Conta" action="#{instituicaoBean.editar()}" />
+                            <p:menuitem value="Excluir Conta" action="#{instituicaoBean.excluir()}" />
+                            <p:menuitem value="Sair" action="#{instituicaoBean.sair()}" />
+                        </p:submenu>
+                    </p:menu>
+                </h:form>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="center">
+                <h:form>
+                    <p:dataTable  var="curso" value="#{cursoBean.cursos}" styleClass="no-border"  rows="10" paginator="true">
+                        <p:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{curso.id}                               
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Url da Imagem</f:facet>
+                            #{curso.imagem}                               
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Status</f:facet>
+                            #{curso.status}                               
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Nome</f:facet>
+                            #{curso.nome}                               
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Descrição</f:facet>
+                            #{curso.descricao}                               
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Conteudo</f:facet>
+                            #{curso.conteudoProgramatico}                               
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Horas</f:facet>
+                            #{curso.horas}                             
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Atualizar" action="#{cursoBean.editar(curso)}" icon="fa fa-pen"/>                       
+                        </p:column>
+                        <p:column>
+                            <p:commandButton value="Excluir" action="#{cursoBean.remover(curso)}" icon="ui-icon-circle-close"/>                            
+                        </p:column>
+                    </p:dataTable>
+                
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastrar Instituição</title>
+        <h:outputStylesheet name="estilo.css" library="css"/>
+    </h:head>
+    
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="115" resizable="false" collapsible="false">
+                <h:panelGrid columns="2">
+                    <p:graphicImage height="70" width="70" library="imagens" name="logoCursando.png"/>
+                    <h1>Cursando</h1>
+                </h:panelGrid>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="100" closable="true" collapsible="true" >               
+                <h2>Cursando - Marcus Teixeira</h2>
+            </p:layoutUnit>
+            
+            <p:layoutUnit position="center">
+                <h:form id="cadInst">
+                    <h:panelGrid columns="1">
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="Digite o nome de usuario:"/>
+                            <p:inputText id="nome" value="#{instituicaoBean.instituicao.nome}" required="true">
+                                <f:validateLength minimum="8" maximum="20" />
+                            </p:inputText>
+                            <p:message for="nome" style="color:red" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="Digite o senha do usuario:"/>
+                            <p:password id="senha" value="#{instituicaoBean.instituicao.senha}" required="true">
+                                <f:validateLength minimum="8" maximum="20" />
+                            </p:password> 
+                            <p:message for="senha" style="color:red" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="Digite o Razão Social:"/>
+                            <p:inputText id="razao" value="#{instituicaoBean.instituicao.razaoSocial}" required="true">
+                                <f:validateLength minimum="10" maximum="100" />
+                            </p:inputText>
+                            <p:message for="razao" style="color:red" />
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="Digite o nome fantazia:"/>
+                            <p:inputText id="fantazia" value="#{instituicaoBean.instituicao.nomeFantazia}" required="true">
+                                <f:validateLength minimum="10" maximum="100" />
+                            </p:inputText>
+                            <p:message for="fantazia" style="color:red" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="Digite o CNPJ da instituição:"/>
+                            <p:inputText id="cnpj" value="#{instituicaoBean.instituicao.cnpj}" required="true" maxlength="18">
+                                <f:validateLength minimum="18" maximum="18" />
+                            </p:inputText>
+                            <p:message for="cnpj" style="color:red" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="Digite data de criação da empresa:"/>
+                            <p:calendar id="dataCriacao" value="#{instituicaoBean.instituicao.dataCriacao}" />
+                            <p:message for="dataCriacao" style="color:red" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value="Digite um email para contato:"/>
+                            <h:inputText id="email" value="#{instituicaoBean.instituicao.email}" required="true">
+                                <!--<f:validateRegex pattern="/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i"/>-->
+                            </h:inputText>
+                            <h:message for="email" style="color:red" />
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="2">
+                            <p:commandButton value="Cadastrar" action="#{instituicaoBean.cadastrar()}" update="cadInst" icon="ui-icon-disk"/>
+                            <p:commandButton value="Limpar" action="#{instituicaoBean.limpar('cadastrarInstituicao')}" update="cadInst" immediate="true" icon="ui-icon-refresh"/>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+            
+</html>
+
